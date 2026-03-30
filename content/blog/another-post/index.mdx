@@ -1,0 +1,73 @@
+---
+title: "My First Post 2"
+date: "2026-02-01"
+description: "An short description shown on the blog listing."
+tags: ["math", "ml", "welp"]
+---
+
+import { YouTube } from "@/components/blog/YouTube";
+import { Spotify } from "@/components/blog/Spotify";
+import { Graph } from "@/components/blog/Graph";
+
+# My First Post 2
+
+In number theory, we often come across additive problems. Hey wait! What are additive problems? :what?: 
+Well, additive problems are problems like the Goldbach conjecture, Sophie Germain conjecture, Waring's problem, etc. etc.
+In general, we try to study about the number of solutions to the equation
+$$a_1+a_2+a_3+\cdots + a_s = n$$for $a_i\in \mathcal{S}_i$ for all $i=1,2 \ldots, s$ and $n\in \mathbb{N}$. Lets denote the number of solutions to the above equation by $f(n; \mathcal{S}_1,\ldots , \mathcal{S}_s)$.
+So when $s=2, \mathcal{S}_1=\mathcal{S}_2=$ set of all primes, then $f(n; \mathcal{S}_1, \mathcal{S}_2)$ is conjecturally at least $1$ for all even $n\geq 4$. Well this is the famous Goldbach conjecture which states that every even number more than $2$ can be expressed as a sum of primes.
+
+Lets see how this is linked with the Sophie Germain Conjecture. So, firstly, what Sophie Germain conjecture states it that there are infinitely many prime numbers $p$ for which $2p+1$ is also a prime. Hmm...interesting ;)...So how is this an additive problem :what?:...lets try to explore this conjecture a bit. As $2p+1$ is a prime, lets call it $q$. So basically, we have two prime numbers $p$ and $q$ such that $$q=2p+1\iff q-2p=1$$Do you now see how its an additive problem? Good! So if $\mathbb{P}$ denotes set of all primes, then what Sophie Germain Conjecture states is$$f(1;\mathbb{P}, -2\mathbb{P})=\infty$$But dealing with stuff like $\infty$ is in general not so easy. So an approach to prove the Sophie Germain Conjecture could be by considering partial sets. Lets define $$\mathbb{P}_N:=\{a\in\mathbb{P}, a\leq N\}$$Now, if we compute $f(1; \mathbb{P}_N, -2\mathbb{P}_N)$, then that would make more sense. If we can get some asymptotic value or a tight lower bound for this function $f(1; \mathbb{P}_N, -2\mathbb{P}_N)$, then proving $$\lim_{N\to\infty}f(1; \mathbb{P}_N, -2\mathbb{P}_N)\to\infty$$would be an easy task ;).
+
+Okay, cool, now the thing left is to find how do we compute this strange function $f(n; \mathcal{S}_1,\ldots , \mathcal{S}_s)$? You guessed it right! We use the circle method :P...To make this blog post reader friendly, I would do a special case when all those $\mathcal{S}_i$s are the same set. However, the same process works for a general case too!
+
+So let $\mathcal{S}_1=\mathcal{S}_2=\ldots = \mathcal{S}_s=A$. So, writting $f(n; A,A,A,\ldots,A)$ looks pretty weird so, we denote this by $f(n; s, A)$. Now, we define the generating function for the set $A$ as follows
+
+$$
+F_A(x):=\sum_{a\in A}e^{2\pi i a x}
+$$
+
+People often add a logarithmic weight to the sum to make calculations easier, but as we are just at an intro, we won't put weights :P. Now, its also a possibility that $|A|=\infty$ and that makes us worry about the convergence of $F_A$...so lets do the same sorta thing which we did in that Sophie's Problem. Lets define partial sets:
+$$A_N:=\{a\in A, a\leq N\}$$and let the generating function for this set be defined as follows:
+$$F_{A_N}:=\sum_{a\in A_N}e^{2\pi i ax}$$Okay, good! Now we don't need to worry about convergence issues as the above sum is finite! We will now denote $e^{2\pi i n}$ by $e(n)$. Well, we have an issue...we aimed to determine the value of $f(n;s,A)$ and not $f_N(n;s,A)$...so can we link them?? The answer comes out to be yes...Its easy to check (infact it follows from definition itself) that if $n\leq N$ then
+$$f_N(n;s,A)=f(n;s,A)$$
+Okay, now lemme show you the magic:
+$$(F_{A_N}(x))^s=\sum_{(a_1,a_2,\ldots, a_s)\in A_N^s}e((a_1+a_2+\cdots +a_s)x)=\sum_{(a_1,a_2,\ldots, a_s)\in A^s}e(nx)=\sum_{n=1}^{\infty}f(n;s,A_N)e(nx)$$and now integrating both the sides with respect to $x$, we get,
+$$\int_0^1F_{A_N}(x)e(-mx)dx=\int_0^1\sum_{n=1}^{\infty}f(n;s,A_N)e(nx)e(-mx)dx=f(n;s,A_N)$$where the last equality follows from the fact that $$\int_0^1 e((a-b)x)dx=\begin{cases} 1 & a=b\\ 0 & a\neq b\end{cases}$$This is a trivial exercise using the Euler's identity that $e^{ix}=\cos(x)+i\sin(x)$.
+
+Thus, we concluded that if $n<N$, then $$f(n;s,A)=\int_0^1F_{A_N}(x)e(-mx)dx$$and this is the main soul of the circle method! Now two things comes to our mind: Where are circles? and How do we evaluate that integral? Well, both the problems have a common answer...There is a parameterization for $[0,1]$ to the unit circle in the complex plane center at $O$. We split this circle in two arcs: Major and Minor...Major arcs are those places where the integrand takes huge values...Remember, to show existence of at least one solution to an additive problem, we just need to show that the integral has positive. So working in the major arcs in bounding the integral helps a lot in proving the integral positive! Indeed, the proof of weak goldbach conjecture (i.e., when $s=3$) can be proved using this method! But for $s=2$, we don't yet have enough powerful tools to bound that integral in the major arcs...
+
+I think this is where I will stop! Hope you liked it :-D...For any suggestions. please let me know in the comment section :)
+
+Some **bold** text, *italic*, and a [hyperlink](https://example.com).
+
+## Math
+
+Inline math: $e^{i\pi} + 1 = 0$
+
+Block math:
+
+$$
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+
+## Code
+```python
+def hello():
+    print("Hello, world!")
+```
+
+## YouTube
+
+<YouTube id="dQw4w9WgXcQ" />
+
+## Spotify
+
+<Spotify url="https://open.spotify.com/track/3t0tswgvUyVxSoYgAj5hWv?si=81b5c55502054867" />
+
+## Graph
+
+<Graph
+  data={[{ x: [1,2,3], y: [1,4,9], type: "scatter", name: "y = x²" }]}
+  title="Simple Graph"
+/>
