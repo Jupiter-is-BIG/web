@@ -5,15 +5,15 @@ import Giscus from "@giscus/react";
 export function Comments() {
   return (
     <Giscus
-      repo="YOUR_GITHUB_USERNAME/YOUR_REPO_NAME"
-      repoId="YOUR_REPO_ID"
+      repo="Jupiter-is-BIG/web"
+      repoId="R_kgDOR0b7zQ"
       category="Announcements"
-      categoryId="YOUR_CATEGORY_ID"
+      categoryId="DIC_kwDOR0b7zc4C5l6a"
       mapping="pathname"
       reactionsEnabled="1"
       emitMetadata="0"
       inputPosition="top"
-      theme="light"
+      theme="http://localhost:3000/_web/giscus.css"
       lang="en"
     />
   );
